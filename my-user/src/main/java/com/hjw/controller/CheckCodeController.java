@@ -20,7 +20,6 @@ public class CheckCodeController {
     public Result createCode(HttpServletRequest request){
         String checkcode = CheckCode.generateVerifyCode(5);
         HttpSession session = request.getSession();
-        System.out.println("aaa");
         if (checkcode!=null){
             session.setAttribute("checkcode",checkcode);
             return  Result.ok().put("checkcode",checkcode);
