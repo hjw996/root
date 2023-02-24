@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjw.mapper.UserMapper">
+
+    <sql id="select_user">
+        select * from user
+    </sql>
+
+    <update id="updateUserStatus" parameterType="user">
+        update user set status = #{status} where id = #{id};
+    </update>
+
+
+    <select id="findUser" resultType="com.hjw.domain.User" parameterType="com.hjw.domain.User">
+        <include refid="select_user"/>
+        <where>
+            <if test="id != null and id != 0">and id=#{id}</if>
+            <if test="username != null">and username=#{username}</if>
+            <if test="password != null">and password=#{password}</if>
+            <if test="name != null">and name=#{name}</if>
+            <if test="phoneNum != null">and phoneNum=#{phoneNum}</if>
+            <if test="createBy != null">and createBy=#{createBy}</if>
+            <if test="createTime != null">and date_formate(createTime,'%y%m%d')=#{createTime}</if>
+            <if test="updateBy != null">and updateBy=#{updateBy}</if>
+            <if test="updateTime != null">and date_formate(updateTime,'%y%m%d')=#{updateTime}</if>
+            <if test="deptId != null and deptId != 0">and deptId=#{deptId}</if>
+            <if test="status != null and status != 0">and status=#{status}</if>
+
+        </where>
+    </select>
+</mapper>
